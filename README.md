@@ -1,37 +1,52 @@
 # Blue Hours — Artifacts of Grief
 
-A responsive, accessible slidedeck presenting seven cultural artifacts that
-sit with loss: memoirs, a lyric essay, a film, and a musical. Each slide pairs
-the artifact's image with concise alt text, an expandable image description,
-and a short reflection on how the work holds grief.
+A searchable, tag-filterable **library** of cultural artifacts about grief that
+opens into a melancholic, responsive **slidedeck** when you click an item. Each
+artifact carries 3–5 colour-coded tags, concise alt text, an expandable image
+description, and a short reflection on how the work holds grief.
 
-## Run it
+Static site — no backend, no build step. Runs as-is on GitHub Pages.
 
-Open `index.html` in any browser. No build step, no dependencies (fonts load
-from Google Fonts when online; the deck degrades to system serifs offline).
+## Use it
 
-## Navigate
+- **Browse** the grid of covers on the landing page.
+- **Search** by title, creator, description, or tag.
+- **Filter** by clicking colour-coded tag chips (selecting several narrows to
+  items that have *all* of them). "Clear filters" resets.
+- **Click a card** to open the slidedeck at that item. You navigate within
+  whatever you've filtered to.
+- In the deck: **arrow keys** / on-screen arrows / swipe to move, **Esc** or
+  **← Library** to go back, and **click any tag** to jump back to the library
+  filtered by it.
+- Deep links: `…/#item-<id>` opens straight to an item.
 
-- **Arrow keys** `←` / `→` (also `PageUp` / `PageDown`, `Home` / `End`)
-- On-screen **prev / next** buttons and **dot** indicators
-- **Swipe** left / right on touch devices
+## Adding artifacts
 
-## The artifacts
+Everything lives in **`data.js`** — no HTML editing.
 
-1. Joan Didion — *The Year of Magical Thinking* (memoir, 2005)
-2. Joan Didion — *Blue Nights* (memoir, 2011)
-3. Maggie Nelson — *Bluets* (lyric essay, 2009)
-4. Yiyun Li — *Dear Friend, from My Life I Write to You in Your Life* (memoir, 2017)
-5. Sarah Chihaya — *Bibliophobia* (memoir, 2025)
-6. Lukas Dhont — *Close* (film, 2022)
-7. *Dear Evan Hansen* (musical, 2016)
+1. Add the cover image (drop a file in the repo, e.g. `covers/your-image.jpg`,
+   or use a full `https://…` URL).
+2. Append an object to the `artifacts` array with: `id`, `image`, `title`,
+   `creator`, `type`, `year`, `alt`, `imageDesc`, `reflection`, and a `tags`
+   array of 3–5 tags. (See the comment block at the top of `data.js`.)
+3. New tags: add them to `TAG_COLORS` in `data.js` with a hex colour (unlisted
+   tags still work — they fall back to a muted grey-blue).
 
-## Accessibility & design notes
+Commit and push; GitHub Pages redeploys automatically.
 
-- Every image carries a concise `alt`; a fuller image description is available
-  behind a disclosure toggle on each slide.
-- Slide changes are announced via an `aria-live` region; slides use
-  `group` / `aria-roledescription="slide"` semantics.
-- Honors `prefers-reduced-motion`.
-- Aesthetic: a muted "blue hour" palette drawn from the covers, literary serif
-  type, slow cross-fades, faint film-grain and vignette — quiet and elegiac.
+## Files
+
+- `index.html` — the app (library + deck), embedded CSS/JS.
+- `data.js` — all content + the tag→colour map. **This is the file you edit.**
+- `*.jpg` / `*.jpeg` — cover images.
+- `.nojekyll` — tells GitHub Pages to serve files as-is.
+
+## Accessibility & design
+
+- Concise `alt` on every deck image; a fuller image description behind a
+  disclosure toggle. Grid thumbnails are decorative (`alt=""`) since the title
+  is adjacent.
+- `aria-live` announcements for search results and slide changes; keyboard
+  navigable throughout; honours `prefers-reduced-motion`.
+- Muted "blue hour" palette, literary serif type, slow cross-fades, faint film
+  grain and vignette — quiet and elegiac.
