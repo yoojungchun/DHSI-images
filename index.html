@@ -224,9 +224,9 @@
 <!-- ===================== LIBRARY VIEW ===================== -->
 <main id="library" class="view" aria-label="Library of artifacts">
   <header class="lib-head">
-    <p class="eyebrow">A Reading List in the Key of Loss</p>
-    <h1>Blue Hours</h1>
-    <p class="sub">Artifacts of Grief</p>
+    <p class="eyebrow" id="siteEyebrow">A Reading List in the Key of Loss</p>
+    <h1 id="siteTitle">Blue Hours</h1>
+    <p class="sub" id="siteSub">Artifacts of Grief</p>
   </header>
 
   <div class="controls">
@@ -504,7 +504,17 @@
   }
   function closeDeckSilently() { deckEl.hidden = true; libraryEl.hidden = false; document.body.style.overflow = ""; }
 
+  // ---------- site headings (from data.js → site) ----------
+  function applySite() {
+    var s = DATA.site || {};
+    if (s.eyebrow != null)  $("siteEyebrow").textContent = s.eyebrow;
+    if (s.title != null)    { $("siteTitle").textContent = s.title; document.title = s.title + (s.subtitle ? " — " + s.subtitle : ""); }
+    if (s.subtitle != null) $("siteSub").textContent = s.subtitle;
+    if (s.searchPlaceholder != null) searchEl.setAttribute("placeholder", s.searchPlaceholder);
+  }
+
   // ---------- init ----------
+  applySite();
   renderLibrary();
   routeFromHash();
 })();

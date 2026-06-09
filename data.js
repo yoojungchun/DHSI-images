@@ -23,6 +23,15 @@
 
 window.BLUE_HOURS = {
 
+  /* Site headings — edit these freely; they appear on the library landing page.
+     (Each artifact's own title / creator / type are edited per item below.) */
+  site: {
+    eyebrow:           "A Reading List in the Key of Loss",
+    title:             "Blue Hours",
+    subtitle:          "Artifacts of Grief",
+    searchPlaceholder: "Search titles, creators, descriptions, tags…"
+  },
+
   tagColors: {
     // form
     "Memoir":        "#5b78b3",
